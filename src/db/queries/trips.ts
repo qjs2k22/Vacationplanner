@@ -25,6 +25,10 @@ export async function createTrip(
     })
     .returning();
 
+  if (!trip) {
+    throw new Error('Failed to create trip');
+  }
+
   return trip;
 }
 
