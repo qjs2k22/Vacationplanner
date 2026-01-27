@@ -35,10 +35,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. User can create a new trip with name and date range
   6. User can view list of all their trips with basic metadata
   7. User can edit trip details or delete trips from their account
-**Plans**: TBD
+**Plans**: 5 plans in 4 waves
 
 Plans:
-- [ ] TBD (to be defined during planning)
+- [ ] 01-01-PLAN.md - Project initialization, TypeScript, T3 Env setup
+- [ ] 01-02-PLAN.md - Clerk authentication integration (sign-in, sign-up, middleware, logout)
+- [ ] 01-03-PLAN.md - Database schema and Drizzle setup (trips table, db client)
+- [ ] 01-04-PLAN.md - Trip CRUD operations (API routes, database queries)
+- [ ] 01-05-PLAN.md - Trip UI and end-to-end verification
 
 ### Phase 2: Manual Input & Wishlist Building
 **Goal**: Users can add fixed events and build wishlist of desired activities
@@ -158,11 +162,11 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Core Infrastructure & Authentication | 0/TBD | Not started | - |
+| 1. Core Infrastructure & Authentication | 0/5 | Planned | - |
 | 2. Manual Input & Wishlist Building | 0/TBD | Not started | - |
 | 3. Live Data Integration | 0/TBD | Not started | - |
 | 4. AI Itinerary Generation | 0/TBD | Not started | - |
