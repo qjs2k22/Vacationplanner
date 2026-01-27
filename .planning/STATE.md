@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Current Position
 
 Phase: 1 of 8 (Core Infrastructure & Authentication)
-Plan: 3 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-01-27 - Completed 01-03-PLAN.md (Database Setup with Drizzle ORM)
+Last activity: 2026-01-27 - Completed 01-04-PLAN.md (Trip CRUD API)
 
-Progress: [█░░░░░░░░░] 10% (3/29 plans complete)
+Progress: [█░░░░░░░░░] 14% (4/29 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 4.2 min
-- Total execution time: 0.2 hours
+- Total plans completed: 4
+- Average duration: 3.9 min
+- Total execution time: 0.3 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 | 3/5 | 12.5m | 4.2m |
+| 01 | 4/5 | 15.5m | 3.9m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (5.5m), 01-02 (4m), 01-03 (3m)
-- Trend: Accelerating execution
+- Last 5 plans: 01-01 (5.5m), 01-02 (4m), 01-03 (3m), 01-04 (3m)
+- Trend: Accelerating execution - consistent 3m on recent plans
 
 *Updated after each plan completion*
 
@@ -64,6 +64,12 @@ Recent decisions affecting current work:
 - UUID primary key with defaultRandom() - distributed-friendly IDs
 - No foreign key to users table - Clerk manages users externally, userId is text reference
 
+**From 01-04 execution:**
+- Defense-in-depth authorization: verify userId at query layer even though middleware checks auth
+- Return 404 (not 403) for unauthorized trip access to mask whether trip exists
+- ISO 8601 datetime strings for API contracts, Date objects for database operations
+- Zod safeParse with detailed error messages for API validation
+
 ### Pending Todos
 
 None yet.
@@ -85,6 +91,11 @@ None yet.
 - PostgreSQL database must have PostGIS extension enabled
 - User setup needed before Phase 2 can create trip records
 
+**From 01-04 execution:**
+- npm run build fails with placeholder Clerk keys (expected - static generation requires valid auth)
+- TypeScript compilation passes - code is type-safe and correct
+- API testing requires both real Clerk keys AND configured DATABASE_URL
+
 **Phase 3 (Live Data Integration):**
 - API cost management critical - must implement caching from day one
 - Need billing alerts configured before any API calls
@@ -103,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-27 23:45 UTC
-Stopped at: Completed 01-03-PLAN.md (Database Setup with Drizzle ORM)
+Last session: 2026-01-27 23:52 UTC
+Stopped at: Completed 01-04-PLAN.md (Trip CRUD API)
 Resume file: None
