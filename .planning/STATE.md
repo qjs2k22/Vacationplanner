@@ -74,6 +74,12 @@ None yet.
 - Real environment variables needed before Plan 01-02 (Clerk) and 01-03 (Database)
 - .env.local with SKIP_ENV_VALIDATION must be removed when real credentials provided
 
+**From 01-02 execution:**
+- Real Clerk API keys required before authentication can be functionally tested
+- User must complete Clerk Dashboard setup (create app, enable email/password auth)
+- .env.local placeholder keys must be replaced with real keys from Clerk Dashboard
+- SKIP_ENV_VALIDATION should remain true until all credentials available (Database + Clerk)
+
 **From 01-03 execution:**
 - DATABASE_URL required before any database operations (db:push, db:generate, db:migrate)
 - PostgreSQL database must have PostGIS extension enabled
