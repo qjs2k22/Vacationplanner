@@ -13,12 +13,20 @@ export default function DashboardLayout({
             <Link href="/trips" className="text-xl font-semibold text-gray-900">
               Trip Coordinator
             </Link>
-            <Link
-              href="/settings"
-              className="text-gray-600 hover:text-gray-900 text-sm"
-            >
-              Settings
-            </Link>
+            <nav className="flex items-center gap-6">
+              <Link
+                href="/import"
+                className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+              >
+                Import
+              </Link>
+              <Link
+                href="/settings"
+                className="text-gray-600 hover:text-gray-900 text-sm"
+              >
+                Settings
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
