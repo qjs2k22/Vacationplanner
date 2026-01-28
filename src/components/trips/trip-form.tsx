@@ -4,6 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Trip } from "@/db/schema";
 
+// Format Date object to YYYY-MM-DD for input[type="date"]
+// Defined outside component to avoid hoisting issues with useState
+function formatDateForInput(date: Date): string {
+  const isoString = new Date(date).toISOString();
+  return isoString.split("T")[0] ?? "";
+}
+
 interface TripFormProps {
   trip?: Trip; // If provided, form is in edit mode
 }
@@ -25,11 +32,6 @@ export function TripForm({ trip }: TripFormProps) {
   // UI state
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Format Date object to YYYY-MM-DD for input[type="date"]
-  function formatDateForInput(date: Date): string {
-    return new Date(date).toISOString().split("T")[0];
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
