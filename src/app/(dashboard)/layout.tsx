@@ -1,29 +1,24 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { UserButtonWithMenu } from "@/components/user-button";
+import Link from "next/link";
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Defense-in-depth: Verify auth in layout (RESEARCH.md Pattern 1)
-  // Note: This is secondary protection - middleware handles redirects
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-xl font-semibold text-gray-900">
+            <Link href="/trips" className="text-xl font-semibold text-gray-900">
               Trip Coordinator
-            </h1>
-            <UserButtonWithMenu />
+            </Link>
+            <Link
+              href="/settings"
+              className="text-gray-600 hover:text-gray-900 text-sm"
+            >
+              Settings
+            </Link>
           </div>
         </div>
       </header>

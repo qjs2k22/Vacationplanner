@@ -1,23 +1,18 @@
-// src/app/(dashboard)/trips/[id]/edit/page.tsx
-import { auth } from "@clerk/nextjs/server";
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getTripById } from "@/db/queries/trips";
 import { TripForm } from "@/components/trips/trip-form";
+
+// Don't pre-render - needs database at runtime
+export const dynamic = "force-dynamic";
 
 interface EditTripPageProps {
   params: Promise<{ id: string }>;
 }
 
 export default async function EditTripPage({ params }: EditTripPageProps) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
   const { id } = await params;
-  const trip = await getTripById(id, userId);
+  const trip = await getTripById(id);
 
   if (!trip) {
     notFound();

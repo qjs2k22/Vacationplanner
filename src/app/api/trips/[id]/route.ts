@@ -1,5 +1,4 @@
 // src/app/api/trips/[id]/route.ts
-import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { getTripById, updateTrip, deleteTrip } from '@/db/queries/trips';
 import { updateTripSchema } from '@/lib/validations';
@@ -15,18 +14,10 @@ export async function GET(
   req: Request,
   { params }: RouteParams
 ) {
-  const { userId } = await auth();
   const { id } = await params;
 
-  if (!userId) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
-
   try {
-    const trip = await getTripById(id, userId);
+    const trip = await getTripById(id);
 
     if (!trip) {
       return NextResponse.json(
@@ -52,15 +43,7 @@ export async function PATCH(
   req: Request,
   { params }: RouteParams
 ) {
-  const { userId } = await auth();
   const { id } = await params;
-
-  if (!userId) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
 
   try {
     const body = await req.json();
@@ -74,7 +57,7 @@ export async function PATCH(
     }
 
     // Build update data, converting dates if provided
-    const updateData: Parameters<typeof updateTrip>[2] = {};
+    const updateData: Parameters<typeof updateTrip>[1] = {};
 
     if (validated.data.name !== undefined) {
       updateData.name = validated.data.name;
@@ -89,7 +72,7 @@ export async function PATCH(
       updateData.endDate = new Date(validated.data.endDate);
     }
 
-    const trip = await updateTrip(id, userId, updateData);
+    const trip = await updateTrip(id, updateData);
 
     if (!trip) {
       return NextResponse.json(
@@ -115,18 +98,10 @@ export async function DELETE(
   req: Request,
   { params }: RouteParams
 ) {
-  const { userId } = await auth();
   const { id } = await params;
 
-  if (!userId) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
-
   try {
-    const deleted = await deleteTrip(id, userId);
+    const deleted = await deleteTrip(id);
 
     if (!deleted) {
       return NextResponse.json(

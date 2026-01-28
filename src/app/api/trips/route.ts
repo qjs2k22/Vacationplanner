@@ -1,24 +1,14 @@
 // src/app/api/trips/route.ts
-import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import { createTrip, getTripsForUser } from '@/db/queries/trips';
+import { createTrip, getAllTrips } from '@/db/queries/trips';
 import { createTripSchema } from '@/lib/validations';
 
 /**
- * GET /api/trips - Get all trips for authenticated user
+ * GET /api/trips - Get all trips
  */
 export async function GET() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
-
   try {
-    const trips = await getTripsForUser(userId);
+    const trips = await getAllTrips();
     return NextResponse.json(trips);
   } catch (error) {
     console.error('Failed to fetch trips:', error);
@@ -33,15 +23,6 @@ export async function GET() {
  * POST /api/trips - Create a new trip
  */
 export async function POST(req: Request) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return NextResponse.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
-  }
-
   try {
     const body = await req.json();
     const validated = createTripSchema.safeParse(body);
@@ -55,7 +36,7 @@ export async function POST(req: Request) {
 
     const { name, description, startDate, endDate } = validated.data;
 
-    const trip = await createTrip(userId, {
+    const trip = await createTrip({
       name,
       description,
       startDate: new Date(startDate),

@@ -1,16 +1,7 @@
-// src/app/(dashboard)/trips/new/page.tsx
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { TripForm } from "@/components/trips/trip-form";
 
-export default async function NewTripPage() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
+export default function NewTripPage() {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-6">

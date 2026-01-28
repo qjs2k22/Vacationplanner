@@ -1,18 +1,12 @@
-// src/app/(dashboard)/trips/page.tsx
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { getTripsForUser } from "@/db/queries/trips";
+import { getAllTrips } from "@/db/queries/trips";
 import { TripCard } from "@/components/trips/trip-card";
 
+// Don't pre-render - needs database at runtime
+export const dynamic = "force-dynamic";
+
 export default async function TripsPage() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
-  const trips = await getTripsForUser(userId);
+  const trips = await getAllTrips();
 
   return (
     <div>

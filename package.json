@@ -13,7 +13,6 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.36.10",
     "@netlify/plugin-nextjs": "^5.15.7",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@vercel/functions": "^3.4.0",

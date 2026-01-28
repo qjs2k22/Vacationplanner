@@ -6,12 +6,9 @@ import {
   timestamp,
 } from 'drizzle-orm/pg-core';
 
-// Trips table - stores user trip information
+// Trips table - stores trip information
 export const trips = pgTable('trips', {
   id: uuid('id').primaryKey().defaultRandom(),
-
-  // Clerk user ID - links trip to authenticated user
-  userId: text('user_id').notNull(),
 
   // Trip details
   name: text('name').notNull(),
